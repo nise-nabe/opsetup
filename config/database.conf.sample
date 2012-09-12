@@ -1,0 +1,7 @@
+[prod]
+dbms=mysql
+username=sns_user
+password=pasword
+hostname=localhost
+port=3306
+sock=
