@@ -5,6 +5,7 @@ import os
 import re
 import subprocess
 import sys
+import ConfigParser
 
 class InstallWorker:
 
@@ -18,9 +19,25 @@ class InstallWorker:
                          'close_fds': True }
         args = ['./symfony', 'openpne:install']
         try:
+            home = os.environ['HOME']
+            conf = ConfigParser.SafeConfigParser()
+            conf.read(home + '/.openpne/database.conf')
+
+            dbms = conf.get('prod' , 'dbms')
+            dbusername = conf.get('prod' , 'username')
+            dbpassword = conf.get('prod' , 'password')
+            dbhostname = conf.get('prod' , 'hostname')
+            dbportname = conf.get('prod' , 'port')
+            dbsocket = conf.get('prod' , 'sock')
+
             p = subprocess.Popen(args, **subproc_args)
-            p.communicate('mysql\ndbuser\npassword\nlocalhost\n\n'
-                          + self.database_name)
+            p.communicate(dbms + '\n'
+                    + dbusername + '\n'
+                    + dbpassword + '\n'
+                    + dbhostname + '\n'
+                    + dbportname + '\n'
+                    + self.database_name + '\n'
+                    + dbsocket)
             ret = p.wait()
             print "Return code: %d" % ret
         except OSError:
