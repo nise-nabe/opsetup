@@ -17,6 +17,7 @@ Exec Example getting source and install
 
 
 Exec Example only install
+
 this command use current directory's name to dbname replacing '.' or '-' to '\_'
 
     $ cd $OPENPNE_DIR
@@ -27,6 +28,7 @@ this command use current directory's name to dbname replacing '.' or '-' to '\_'
 ## Required
 
 mod\_rewrite
+
 mod\_vhost\_alias
 
 ## Settings
@@ -39,7 +41,3 @@ Apache
       Options -Indexes +FollowSymLinks
       VirtualDocumentRoot "/var/www/sns/%0/web"
     </VirtualHost>
-
-# TODO
-
-extract settings to files
