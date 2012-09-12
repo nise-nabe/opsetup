@@ -9,7 +9,7 @@ Setup database parameter
 
     $ mkdir ~/.openpne
     $ cp config/database.conf.sample ~/.openpne/database.conf
-    $ vim ~/.openpne/databse.conf
+    $ vim ~/.openpne/database.conf
 
 Exec Example getting source and install
 
