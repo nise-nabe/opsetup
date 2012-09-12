@@ -30,8 +30,8 @@ class InstallWorker:
 if __name__ == '__main__':
     dirname = os.getcwd().split(os.sep)[-1]
 
-    domain_name = dirname + '.domainname'
-    database_name = 'openpne_' + re.sub(r'[.-]', '_', dirname)
+    domain_name = dirname
+    database_name = re.sub(r'[.-]', '_', dirname)
 
     print os.getcwd()
     print 'domain = ' + domain_name
