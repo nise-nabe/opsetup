@@ -8,8 +8,8 @@ under construction
 Setup database parameter
 
     $ mkdir ~/.openpne
-    $ cp config/database.conf.sample ~/.openpne/database.conf
-    $ vim ~/.openpne/database.conf
+    $ cp config/config.sample ~/.openpne/config
+    $ vim ~/.openpne/config
 
 Exec Example getting source and install
 

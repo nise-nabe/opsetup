@@ -21,14 +21,14 @@ class InstallWorker:
         try:
             home = os.environ['HOME']
             conf = ConfigParser.SafeConfigParser()
-            conf.read(home + '/.openpne/database.conf')
+            conf.read(home + '/.openpne/config')
 
-            dbms = conf.get('prod' , 'dbms')
-            dbusername = conf.get('prod' , 'username')
-            dbpassword = conf.get('prod' , 'password')
-            dbhostname = conf.get('prod' , 'hostname')
-            dbportname = conf.get('prod' , 'port')
-            dbsocket = conf.get('prod' , 'sock')
+            dbms = conf.get('database' , 'dbms')
+            dbusername = conf.get('database' , 'username')
+            dbpassword = conf.get('database' , 'password')
+            dbhostname = conf.get('database' , 'hostname')
+            dbportname = conf.get('database' , 'port')
+            dbsocket = conf.get('database' , 'sock')
 
             p = subprocess.Popen(args, **subproc_args)
             p.communicate(dbms + '\n'

@@ -1,4 +1,4 @@
-[prod]
+[database]
 dbms=mysql
 username=sns_user
 password=pasword
