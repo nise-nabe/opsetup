@@ -8,7 +8,7 @@ README = os.path.join(os.path.dirname(__file__), 'README.md')
 LONG_DESCRIPTION = open(README).read() + '\n\n'
 
 setup(name='opsetup',
-      version='0.1.0',
+      version='1.0',
       description=('Easy install OpenPNE'),
       long_description=LONG_DESCRIPTION,
       keywords='openpne',
