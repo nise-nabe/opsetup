@@ -79,7 +79,7 @@ class SetupWorker:
         os.remove(tmpname)
 
     def get_target_dir_name(self):
-        return self.base_dir + os.sep + self.dir_name
+        return os.sep.join([self.base_dir, self.dir_name])
 
     def get_target_version(self):
         return self.target_version
