@@ -43,3 +43,9 @@ if you write 'basedomain=sns.example.com' in config file, you can use wild card 
       Options -Indexes +FollowSymLinks
       VirtualDocumentRoot "/var/www/sns/%0/web"
     </VirtualHost>
+
+### MySQL
+
+if you write 'prefix=openpne' in config file, you can grant privileges as follow:
+
+    mysql> grant all privileges on `openpne_%`.* to sns_user@'localhost' identified by '******';
