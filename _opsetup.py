@@ -75,7 +75,7 @@ class SetupWorker:
             output_file.close()
             input_file.close()
 
-        shutil.copyfile(tmpname, file)
+        shutil.copyfile(tmpname, filename)
         os.remove(tmpname)
 
     def get_target_dir_name(self):
