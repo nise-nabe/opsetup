@@ -13,7 +13,7 @@ Setup database parameter
 
 Exec Example getting source and install
 
-    $ _opsetup.py -c OpenPNE-3.8.1 -d 381sns.example.com -i
+    $ _opsetup.py OpenPNE-3.8.1 381sns.example.com -i
 
 
 Exec Example only install
