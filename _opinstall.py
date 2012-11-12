@@ -41,7 +41,8 @@ class InstallWorker:
 if __name__ == '__main__':
     dirname = os.getcwd().split(os.sep)[-1]
 
-    conf = ConfigParser.SafeConfigParser()
+    usage = u'%prog \nDetailed options -h or --help'
+    conf = ConfigParser.SafeConfigParser(usage=usage, version=1.0)
     conf.read(os.sep.join([os.environ['HOME'], '.openpne' , 'config']))
 
     domain_name = dirname + '.' + conf.get('web', 'basedomain')
