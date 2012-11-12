@@ -19,25 +19,19 @@ class InstallWorker:
                          'close_fds': True }
         args = ['./symfony', 'openpne:install']
         try:
-            home = os.environ['HOME']
             conf = ConfigParser.SafeConfigParser()
-            conf.read(home + '/.openpne/config')
-
-            dbms = conf.get('database' , 'dbms')
-            dbusername = conf.get('database' , 'username')
-            dbpassword = conf.get('database' , 'password')
-            dbhostname = conf.get('database' , 'hostname')
-            dbportname = conf.get('database' , 'port')
-            dbsocket = conf.get('database' , 'sock')
+            conf.read(os.sep.join([os.environ['HOME'], '.openpne' , 'config']))
 
             p = subprocess.Popen(args, **subproc_args)
-            p.communicate(dbms + '\n'
-                    + dbusername + '\n'
-                    + dbpassword + '\n'
-                    + dbhostname + '\n'
-                    + dbportname + '\n'
-                    + self.database_name + '\n'
-                    + dbsocket)
+            p.communicate('\n'.join([
+                conf.get('database' , 'dbms'),
+                conf.get('database' , 'username'),
+                conf.get('database' , 'password'),
+                conf.get('database' , 'hostname'),
+                conf.get('database' , 'port'),
+                self.database_name,
+                conf.get('database' , 'sock'),
+            ]))
             ret = p.wait()
             print "Return code: %d" % ret
         except OSError:
@@ -48,7 +42,11 @@ if __name__ == '__main__':
     dirname = os.getcwd().split(os.sep)[-1]
 
     domain_name = dirname
-    database_name = re.sub(r'[.-]', '_', dirname)
+    db_prefix = conf.get('database', 'prefix')
+    if db_prefix != '':
+        db_prefix += '_'
+
+    database_name = db_prefix + re.sub(r'[.-]', '_', dirname)
 
     print os.getcwd()
     print 'domain = ' + domain_name

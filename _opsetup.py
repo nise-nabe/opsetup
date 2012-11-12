@@ -3,6 +3,7 @@
 
 from _opinstall import InstallWorker
 from optparse import OptionParser
+import ConfigParser
 import os
 import re
 import subprocess
@@ -124,8 +125,11 @@ if __name__ == '__main__':
     setup.execute()
 
     if options.is_install:
-        domain_name = setup.dir_name + '.domainname'
-        database_name = 'openpne_' + re.sub(r'[.-]', '_', setup.dir_name)
+        domain_name = setup.dir_name + '.' + conf.get('web', 'basedomain')
+        db_prefix = conf.get('database', 'prefix')
+        if db_prefix != '':
+            db_prefix += '_'
+        database_name = db_prefix + re.sub(r'[.-]', '_', domain_name)
 
         install = InstallWorker(domain_name, database_name,
                                 setup.get_target_dir_name())

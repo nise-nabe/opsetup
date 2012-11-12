@@ -1,3 +1,6 @@
+[web]
+basedomain=sns.example.com
+
 [database]
 dbms=mysql
 username=sns_user
@@ -5,3 +8,4 @@ password=pasword
 hostname=localhost
 port=3306
 sock=
+prefix=
