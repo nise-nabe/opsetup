@@ -1,5 +1,6 @@
 [web]
 basedomain=sns.example.com
+sns_base_dir=/var/www/sns
 
 [database]
 dbms=mysql

@@ -23,6 +23,11 @@ this command use current directory's name to dbname replacing '.' or '-' to '\_'
     $ cd $OPENPNE_DIR
     $ _opinstall.py
 
+
+You can deploy in /var/www/sns (default) using symlink as follow command:
+
+    $ _opdeploy.py
+
 # Server Setup
 
 ## Required
@@ -35,7 +40,8 @@ mod\_vhost\_alias
 
 ### Apache
 
-if you write 'basedomain=sns.example.com' in config file, you can use wild card domain setting as follow:
+if you write 'base\_domain=sns.example.com' and 'sns\_base\_dir=/var/www/sns' in config file,
+you can use wild card domain setting as follow:
 
     <VirtualHost *:80>
       ServerName .sns.example.com
