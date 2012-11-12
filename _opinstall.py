@@ -41,12 +41,15 @@ class InstallWorker:
 if __name__ == '__main__':
     dirname = os.getcwd().split(os.sep)[-1]
 
-    domain_name = dirname
+    conf = ConfigParser.SafeConfigParser()
+    conf.read(os.sep.join([os.environ['HOME'], '.openpne' , 'config']))
+
+    domain_name = dirname + '.' + conf.get('web', 'basedomain')
     db_prefix = conf.get('database', 'prefix')
     if db_prefix != '':
         db_prefix += '_'
 
-    database_name = db_prefix + re.sub(r'[.-]', '_', dirname)
+    database_name = db_prefix + re.sub(r'[.-]', '_', domain_name)
 
     print os.getcwd()
     print 'domain = ' + domain_name
