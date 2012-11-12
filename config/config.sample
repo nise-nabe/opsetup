@@ -1,5 +1,5 @@
 [web]
-basedomain=sns.example.com
+base_domain=sns.example.com
 sns_base_dir=/var/www/sns
 
 [database]

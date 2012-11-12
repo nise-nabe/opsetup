@@ -45,7 +45,7 @@ if __name__ == '__main__':
     conf = ConfigParser.SafeConfigParser(usage=usage, version=1.0)
     conf.read(os.sep.join([os.environ['HOME'], '.openpne' , 'config']))
 
-    domain_name = dirname + '.' + conf.get('web', 'basedomain')
+    domain_name = dirname + '.' + conf.get('web', 'base_domain')
     db_prefix = conf.get('database', 'prefix')
     if db_prefix != '':
         db_prefix += '_'

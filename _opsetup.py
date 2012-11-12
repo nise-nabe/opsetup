@@ -131,7 +131,7 @@ if __name__ == '__main__':
     setup.execute()
 
     if options.is_install:
-        domain_name = setup.dir_name + '.' + conf.get('web', 'basedomain')
+        domain_name = setup.dir_name + '.' + conf.get('web', 'base_domain')
         db_prefix = conf.get('database', 'prefix')
         if db_prefix != '':
             db_prefix += '_'
