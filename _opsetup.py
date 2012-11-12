@@ -89,11 +89,8 @@ class SetupWorker:
 
 
 if __name__ == '__main__':
-    parser = OptionParser()
-    parser.add_option('-d', '--directory', dest='dir_name', metavar='DIR',
-                      help='name of target to setup')
-    parser.add_option('-c', '--commit', dest='commit_name', metavar='COMMIT',
-                      help='commit of target to setup')
+    usage = u'%prog [Version] [Directory] [Options]\nDetailed options -h or --help'
+    parser = OptionParser(usage=usage, version=1.0)
     parser.add_option('-b', '--branch', dest='branch_name', metavar='BRANCH',
                       help='branch of target ot setup (not working)')
     parser.add_option('-r', '--repo', dest='repo', metavar='REPOSITORY',
@@ -102,16 +99,25 @@ if __name__ == '__main__':
     parser.add_option('-i', '--install', action='store_true', dest='is_install',
                       help='set if you want to install')
 
+    conf_file = os.sep.join([os.environ['HOME'], '.openpne', 'config'])
+    conf = ConfigParser.SafeConfigParser()
+    if not os.path.isfile(conf_file):
+        print 'config file does not exist: ' + conf_file
+        sys.exit(0)
+
+    conf.read(conf_file)
+
     (options, args) = parser.parse_args()
 
-    setup = SetupWorker(options.dir_name, options.commit_name, options.repo)
-    print setup.get_target_dir_name()
-    print setup.get_target_version()
-    print setup.get_repository()
-    print 'インストールする' if options.is_install else 'インストールしない'
+    if len(args) < 2:
+        parser.error('Argument is not enough')
 
-    if options.dir_name == '':
-        sys.exit(0)
+
+    setup = SetupWorker(args[1], args[0], options.repo)
+    print 'dir: ' + setup.get_target_dir_name()
+    print 'ver: ' + setup.get_target_version()
+    print 'rep: ' + setup.get_repository()
+    print 'インストール' + ('する' if options.is_install else 'しない')
 
     while True:
         yn = raw_input('セットアップしますか？ y/N: ')
