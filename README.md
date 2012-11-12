@@ -33,11 +33,13 @@ mod\_vhost\_alias
 
 ## Settings
 
-Apache
+### Apache
+
+if you write 'basedomain=sns.example.com' in config file, you can use wild card domain setting as follow:
 
     <VirtualHost *:80>
-      ServerName .aaa
-      ServerAlias *.aaa
+      ServerName .sns.example.com
+      ServerAlias *.sns.example.com
       Options -Indexes +FollowSymLinks
       VirtualDocumentRoot "/var/www/sns/%0/web"
     </VirtualHost>
