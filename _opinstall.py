@@ -42,7 +42,7 @@ if __name__ == '__main__':
     dirname = os.getcwd().split(os.sep)[-1]
 
     usage = u'%prog \nDetailed options -h or --help'
-    conf = ConfigParser.SafeConfigParser(usage=usage, version=1.0)
+    conf = ConfigParser.SafeConfigParser()
     conf.read(os.sep.join([os.environ['HOME'], '.openpne' , 'config']))
 
     domain_name = dirname + '.' + conf.get('web', 'base_domain')
