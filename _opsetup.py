@@ -98,6 +98,8 @@ if __name__ == '__main__':
                       default='git://github.com/openpne/OpenPNE3.git')
     parser.add_option('-i', '--install', action='store_true', dest='is_install',
                       help='set if you want to install')
+    parser.add_option('-f', '--force', action='store_true', dest='is_force',
+                      help='set if you want to force setup')
 
     conf_file = os.sep.join([os.environ['HOME'], '.openpne', 'config'])
     conf = ConfigParser.SafeConfigParser()
@@ -119,13 +121,14 @@ if __name__ == '__main__':
     print 'rep: ' + setup.get_repository()
     print 'インストール' + ('する' if options.is_install else 'しない')
 
-    while True:
-        yn = raw_input('セットアップしますか？ y/N: ')
-        if re.compile('[yY]').match(yn):
-            break
-        elif re.compile('[nN]').match(yn):
-            print 'aborted'
-            sys.exit(0)
+    if not options.is_force:
+        while True:
+            yn = raw_input('セットアップしますか？ y/N: ')
+            if re.compile('[yY]').match(yn):
+                break
+            elif re.compile('[nN]').match(yn):
+                print 'aborted'
+                sys.exit(0)
 
     #try:
     setup.execute()
