@@ -32,11 +32,9 @@ class InstallWorker:
                 self.database_name,
                 conf.get('database' , 'sock'),
             ]))
-            ret = p.wait()
-            print "Return code: %d" % ret
+            return p.wait()
         except OSError:
-            print "OpenPNE ディレクトリじゃなくね？"
-            sys.exit(1)
+            return -1
 
 if __name__ == '__main__':
     dirname = os.getcwd().split(os.sep)[-1]
@@ -69,4 +67,5 @@ if __name__ == '__main__':
             sys.exit(0)
 
     install = InstallWorker(domain_name, database_name)
-    install.execute()
+    ret = install.execute()
+    print "Return code: %d" % ret
