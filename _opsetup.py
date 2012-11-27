@@ -114,12 +114,22 @@ if __name__ == '__main__':
     if len(args) < 2:
         parser.error('Argument is not enough')
 
-
     setup = SetupWorker(args[1], args[0], options.repo)
+
+    domain_name = setup.dir_name + '.' + conf.get('web', 'base_domain')
+    db_prefix = conf.get('database', 'prefix')
+    if db_prefix != '':
+        db_prefix += '_'
+    database_name = db_prefix + re.sub(r'[.-]', '_', domain_name)
+
     print 'dir: ' + setup.get_target_dir_name()
     print 'ver: ' + setup.get_target_version()
     print 'rep: ' + setup.get_repository()
-    print 'インストール' + ('する' if options.is_install else 'しない')
+    if options.is_install:
+        print 'db: ' + database_name
+        print 'インストールする'
+    else:
+        print 'インストールしない'
 
     if not options.is_force:
         while True:
@@ -134,12 +144,6 @@ if __name__ == '__main__':
     setup.execute()
 
     if options.is_install:
-        domain_name = setup.dir_name + '.' + conf.get('web', 'base_domain')
-        db_prefix = conf.get('database', 'prefix')
-        if db_prefix != '':
-            db_prefix += '_'
-        database_name = db_prefix + re.sub(r'[.-]', '_', domain_name)
-
         install = InstallWorker(domain_name, database_name,
                                 setup.get_target_dir_name())
         install.execute()
