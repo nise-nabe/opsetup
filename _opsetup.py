@@ -116,7 +116,10 @@ if __name__ == '__main__':
 
     setup = SetupWorker(args[1], args[0], options.repo)
 
-    domain_name = setup.dir_name + '.' + conf.get('web', 'base_domain')
+    domain_name = setup.dir_name
+    base_domain = conf.get('web', 'base_domain')
+    if base_domain != '':
+        domain_name += '.' + base_domain
     db_prefix = conf.get('database', 'prefix')
     if db_prefix != '':
         db_prefix += '_'
