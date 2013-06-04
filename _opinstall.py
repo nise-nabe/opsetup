@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from optparse import OptionParser
 import os
 import re
 import subprocess
@@ -40,6 +41,10 @@ if __name__ == '__main__':
     dirname = os.getcwd().split(os.sep)[-1]
 
     usage = u'%prog \nDetailed options -h or --help'
+    parser = OptionParser(usage=usage, version=1.0)
+    parser.add_option('-f', '--force', action='store_true', dest='is_force',
+                      help='set if you want to force setup')
+
     conf = ConfigParser.SafeConfigParser()
     conf.read(os.sep.join([os.environ['HOME'], '.openpne' , 'config']))
 
@@ -58,13 +63,15 @@ if __name__ == '__main__':
     print 'domain = ' + domain_name
     print 'database = ' + database_name
 
-    while True:
-        yn = raw_input('インストールしますか？ y/N: ')
-        if re.compile('[yY]').match(yn):
-            break
-        elif re.compile('[nN]').match(yn):
-            print 'aborted'
-            sys.exit(0)
+    (options, args) = parser.parse_args()
+    if not options.is_force:
+      while True:
+          yn = raw_input('インストールしますか？ y/N: ')
+          if re.compile('[yY]').match(yn):
+              break
+          elif re.compile('[nN]').match(yn):
+              print 'aborted'
+              sys.exit(0)
 
     install = InstallWorker(domain_name, database_name)
     ret = install.execute()
